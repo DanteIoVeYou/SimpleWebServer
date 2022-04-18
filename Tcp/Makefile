@@ -1,7 +1,8 @@
+.PHONY:all
 all:TcpServer TcpClient
-TcpSerever: TcpServer.cc
+TcpSerever:TcpServer.cc
 	g++ -o $@ $^ -std=c++11 -lpthread
-TcpClient: TcpClient.cc
+TcpClient:TcpClient.cc
 	g++ -o $@ $^ -std=c++11
 .PHONY:clean
 clean:

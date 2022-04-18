@@ -9,8 +9,8 @@
 #include <cstdlib>
 #include <pthread.h>
 
-namespace Server
-{
+// namespace Server
+// {
 	using namespace std;
 	void Usage(std::string proc) {
 		printf("Usage:\n\t%s [port]\n", proc.c_str());
@@ -56,6 +56,7 @@ namespace Server
 				}
 			}
 			close(sock);
+			return nullptr;
 		}
 		void Init() {
 			// 1. create socket
@@ -105,4 +106,4 @@ namespace Server
 		uint16_t _port;
 		int _listen_sock;
 	};
-} // namespace end
+// } // namespace end

@@ -8,8 +8,8 @@
 #include <cstring>
 #include <cstdlib>
 
-namespace Client
-{
+// namespace Client
+// {
     void Usage(std::string proc) {
         printf("Usage:\n\t%s [ip] [port]\n", proc.c_str());
     }
@@ -38,9 +38,13 @@ namespace Client
         }
         void Start() {
             while(true) {
-                buffer[1024];
-                buffer[0] = 0;
-                write(0, buffer, sizeof(buffer) - 1);
+                char buffer[1024] = {0};
+                std::cout << "enter# ";
+                fflush(stdout);
+                read(0, buffer, sizeof(buffer)-1);
+                // std::string buffer;
+                // std::getline(std::cin, buffer);
+                // ssize_t s = send(_sock, buffer.c_str(), strlen(buffer.c_str()), 0);
                 ssize_t s = send(_sock, buffer, strlen(buffer) - 1, 0);
                 if(s < 0) {
                     std::cerr << "send failed" << std::endl;
@@ -48,6 +52,11 @@ namespace Client
                 }
                 else {
                     // send success
+                    std::string message(buffer, 4);
+                    if(message == "quit") {
+                        break;
+                    }
+                    buffer[0] = 0;
                     ssize_t s = recv(_sock, buffer, sizeof(buffer), 0);
                     if(s < 0) {
                         std::cerr << "recv failed" << std::endl;
@@ -66,4 +75,4 @@ namespace Client
         std::string _ip;
         int _sock;
     };
-}// namespace end
+// }// namespace end
